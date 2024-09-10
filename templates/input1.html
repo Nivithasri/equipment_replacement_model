@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EQUIPMENT REPLACEMENT MODEL</title>
+    <style>
+        .title-container {
+            width: 100%;
+            background: linear-gradient(to bottom right, #37c8d2, #b9ef95); 
+            padding: 20px; 
+            box-sizing: border-box; 
+            border: 2px solid #000; 
+            text-align: center;
+        }
+
+        .title-text {
+            font-size: 24px; 
+            color: #0b0b0b; 
+            margin: 0; 
+        }     
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <h1 class="title-text">EQUIPMENT REPLACEMENT MODEL</h1>
+    </div>
+    <br><br>
+    <h2>Enter Data</h2>
+    <br>
+    <form method='post' action='equip1' onsubmit="return validateForm()">
+        {% csrf_token %}
+        <label for="currentAge">Current Age of Machine:</label>
+        <input type="number" name="age" id="currentAge" placeholder="Enter current age"><br><br>
+
+        <label for="years">Number of Years:</label>
+        <input type="number" name="n" id="years" placeholder="Enter number of years"><br><br>
+
+        <label for="newCost">Cost of New Machine (Rs):</label>
+        <input type="number" name="cost" id="newCost" placeholder="Enter cost of new machine"><br><br>
+
+        <label for="replaceAge">Age at which the Machine should be Replaced:</label>
+        <input type="number" name="rep" id="replaceAge" placeholder="Enter age of machine to be replaced"><br><br><br>
+        <input type ='submit' value='NEXT'>
+     </form> 
+    <script>
+        function validateForm() {
+            var age = document.getElementById("currentAge").value;
+            var years = document.getElementById("years").value;
+            var cost = document.getElementById("newCost").value;
+            var rep = document.getElementById("replaceAge").value;
+
+            if (age === "" || years === "" || cost === "" || rep === "") {
+                alert("All fields are required");
+                return false; 
+            }
+
+            if (cost < 0 ) {
+                alert("Cost can not be negative");
+                return false; 
+            }
+            if (age < 0 || rep < 0) {
+                alert("Age can not be negative");
+                return false; 
+            }
+            if (years < 0 ) {
+                alert("Number of years can not be negative");
+                return false; 
+            }
+            return true; 
+        }
+    </script>
+</body>
+</html>

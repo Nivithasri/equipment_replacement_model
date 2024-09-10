@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EQUIPMENT REPLACEMENT MODEL</title>
+    <style> 
+        .title-container {
+            width: 100%;
+            background: linear-gradient(to bottom right, #37c8d2, #b9ef95); 
+            padding: 20px; 
+            box-sizing: border-box; 
+            border: 2px solid #000; 
+            text-align: center;
+        }
+
+        .title-text {
+            font-size: 24px; 
+            color: #0b0b0b; 
+            margin: 0; 
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="title-container">
+        <h1 class="title-text">EQUIPMENT REPLACEMENT MODEL</h1>
+    </div>
+    <br><br>
+    <p>THE ALTERNATIVE OPTIMAL POLICIES STARTING IN YEAR 1: </p>
+    <br>
+    <script>
+        // Number of flowcharts
+        var n = {{ opt|length }}; 
+        
+        // Number of blocks in each flowchart
+        var m = {{ opt.0|length}}; 
+        var opt = {{ opt|safe }};
+        
+        // flowchart
+        for (var i = 0; i < n; i++) {
+            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "200");
+            svg.setAttribute("style", "margin-bottom: 20px; border: 1px solid black;");
+            document.body.appendChild(svg);
+
+            // Create blocks 
+            for (var j = 0; j <= m; j++) {
+                var xPos = 100 * j + 50;
+                var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                rect.setAttribute("x", xPos);
+                rect.setAttribute("y", 25);
+                rect.setAttribute("width", "80");
+                rect.setAttribute("height", "50");
+                rect.setAttribute("fill", "#f0f0f0");
+                rect.setAttribute("stroke", "black");
+                rect.setAttribute("stroke-width", "2");
+                svg.appendChild(rect);
+
+                // text in block
+                var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", xPos + 40);
+                text.setAttribute("y", 55);
+                text.setAttribute("text-anchor", "middle");
+                if (j == m) {
+                    text.textContent = "sell";
+                } else {
+                    text.textContent = opt[i][j];
+                }
+                svg.appendChild(text);
+
+                // label 
+                if(j<m){
+                var yearText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                yearText.setAttribute("x", xPos - 20);
+                yearText.setAttribute("y", 90);
+                yearText.setAttribute("text-anchor", "middle");
+                yearText.textContent = 'year '+(j+1);
+                svg.appendChild(yearText);}
+
+                // arrow 
+                if (j < m) {
+                    var arrow = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    arrow.setAttribute("x1", xPos + 80);
+                    arrow.setAttribute("y1", 50);
+                    arrow.setAttribute("x2", xPos + 100);
+                    arrow.setAttribute("y2", 50);
+                    arrow.setAttribute("stroke", "black");
+                    arrow.setAttribute("stroke-width", "2");
+                    svg.appendChild(arrow);
+                }
+            }
+        }
+    </script>
+    <p>THE TOTAL COST IS: {{cost}}</p>
+</body>
+</html>

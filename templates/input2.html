@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EQUIPMENT REPLACEMENT MODEL</title>
+    <style>
+        
+        .title-container {
+            width: 100%;
+            background: linear-gradient(to bottom right, #37c8d2, #b9ef95); 
+            padding: 20px; 
+            box-sizing: border-box; 
+            border: 2px solid #000; 
+            text-align: center;
+        }
+
+        .title-text {
+            font-size: 24px; 
+            color: #0b0b0b;
+            margin: 0; 
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background: linear-gradient(to bottom right,#92d0e5, #d3edc1);;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <h1 class="title-text">EQUIPMENT REPLACEMENT MODEL</h1>
+    </div>
+    <br><br>
+    <form action="input2" method="post" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <label for="t">Enter age:</label>
+        <input type="number" name='t' id="tInput" placeholder="Enter t"><br><br>
+        <label for="r">Enter revenue:</label>
+        <input type="number" id="rInput" name="r" placeholder="Enter r"><br><br>
+        <label for="c">Enter operating cost:</label>
+        <input type="number" name='c' id="cInput" placeholder="Enter c"><br><br>
+        <label for="s">Enter salvage value:</label>
+        <input type="number" name='s' id="sInput" placeholder="Enter s"><br><br>
+        <br>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>AGE (t) in years</th>
+                    <th>REVENUE r(t) (Rs)</th>
+                    <th>OPERATING COST c(t) (Rs)</th>
+                    <th>SALVAGE VALUE s(t) (Rs)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows%}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
+        <input type="submit" value="NEXT ROW" onclick="return validateForm()">
+        <br><br>
+        <input type="submit" name="calculate" value="CALCULATE">
+    </form>
+    <script>
+        function validateForm() {
+            var t = document.getElementById("tInput").value;
+            var r = document.getElementById("rInput").value;
+            var c = document.getElementById("cInput").value;
+            var s = document.getElementById("sInput").value;
+    
+            if (r === "" || c === "" || s === "" || t === "") {
+                alert("All fields are required");
+                return false; 
+            }
+    
+            if (r < 0 || c < 0 || s < 0) {
+                alert("Cost can't be negative");
+                return false; 
+            }
+    
+            if (t < 0) {
+                alert("Age can't be negative");
+                return false; 
+            }
+    
+            return true; 
+        }
+    </script>
+    
+</body>
+</html>
