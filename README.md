@@ -32,22 +32,22 @@ c(t): Operating cost of a machine t years old.
 s(t): Salvage value obtained by selling a machine t years old.
 I: Cost of acquiring a new machine.
 ### Recursive Objective Function:
-To maximize net income:
--If the machine is kept:
-r(t) - c(t) + fi+1(t+1)
--If the machine is replaced:
-r(0) + s(t) - I - c(0) + fi+1(1)
-Where fi+1(t+1) represents the maximum net income for the remaining years with the machine aging by one year.
+  -To maximize net income:
+    -If the machine is kept:
+      -r(t) - c(t) + fi+1(t+1)
+    -If the machine is replaced:
+      -r(0) + s(t) - I - c(0) + fi+1(1)
+    Where fi+1(t+1) represents the maximum net income for the remaining years with the machine aging by one year.
 
 ## Software Requirements
 
 ### Programming Language and Framework:
--Python
--Django Framework: Used to design the front-end interface.
+  -Python
+  -Django Framework: Used to design the front-end interface.
 
 ### Python Libraries:
--NumPy: For mathematical operations and computations.
--Pandas: For handling and analyzing input data.
+  -NumPy: For mathematical operations and computations.
+  -Pandas: For handling and analyzing input data.
 
 ## Installation and Setup
 ### Prerequisites:
@@ -65,7 +65,7 @@ Where fi+1(t+1) represents the maximum net income for the remaining years with t
 
 2. Navigate to the project directory.  
    ```bash  
-   cd   
+   cd equipment_replacement_model
    ```  
 
 3. Start the development server.  
